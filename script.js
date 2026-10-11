@@ -6,14 +6,36 @@ const noteCount = document.querySelector("#note-count");
 const errorMessage = document.querySelector("#error-message");
 const searchInput = document.querySelector("#search-input");
 
-// Store all notes in an array
+// Load saved notes from localStorage
 let notes = [];
 
-// Display notes on the page
+try {
+  const savedNotes = localStorage.getItem("quicknotes-notes");
+  notes = savedNotes ? JSON.parse(savedNotes) : [];
+
+  if (!Array.isArray(notes)) {
+    notes = [];
+  }
+} catch (error) {
+  notes = [];
+}
+
+// Save notes to localStorage
+function saveNotes() {
+  localStorage.setItem("quicknotes-notes", JSON.stringify(notes));
+}
+
+// Display notes and update the count
 function render() {
   notesList.textContent = "";
 
-  notes.forEach(function (note) {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+
+  const filteredNotes = notes.filter(function (note) {
+    return note.text.toLowerCase().includes(searchTerm);
+  });
+
+  filteredNotes.forEach(function (note) {
     const li = document.createElement("li");
     li.classList.add(`category-${note.category}`);
 
@@ -30,6 +52,7 @@ function render() {
         return item.id !== note.id;
       });
 
+      saveNotes();
       errorMessage.textContent = "";
       render();
     });
@@ -38,7 +61,7 @@ function render() {
     notesList.appendChild(li);
   });
 
-  // Update the note count
+  // Count all notes, not just search results
   if (notes.length === 0) {
     noteCount.textContent = "You have no notes.";
   } else if (notes.length === 1) {
@@ -48,7 +71,7 @@ function render() {
   }
 }
 
-// Handle form submission and validation
+// Add a new note
 noteForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -74,8 +97,18 @@ noteForm.addEventListener("submit", function (event) {
 
   notes.push(note);
 
+  saveNotes();
+
   errorMessage.textContent = "";
   noteInput.value = "";
 
   render();
 });
+
+// Search notes as the user types
+searchInput.addEventListener("input", function () {
+  render();
+});
+
+// Display saved notes when the page opens
+render();
