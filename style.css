@@ -1,0 +1,138 @@
+/* 1. Reset default spacing and sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Style the whole page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  color: #333333;
+  line-height: 1.6;
+}
+
+/* 3. Style the header */
+header {
+  background-color: #2563eb;
+  color: white;
+  text-align: center;
+  padding: 24px;
+}
+
+/* 4. Style the main content area */
+main {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* 5. Style each section */
+section {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* 6. Style section headings */
+h2 {
+  margin-bottom: 15px;
+}
+
+/* 7. Arrange the form controls using Flexbox */
+#note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 8. Style text inputs and dropdowns */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* 9. Style buttons */
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 10. Change button appearance when hovered over */
+button:hover {
+  background-color: #1d4ed8;
+}
+
+/* 11. Style the notes list */
+#notes-list {
+  list-style: none;
+  margin-top: 15px;
+}
+
+/* 12. Style individual note cards */
+#notes-list li {
+  padding: 15px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+}
+
+/* 13. Give each category its own color */
+.category-personal {
+  border-left: 5px solid #9333ea;
+}
+
+.category-work {
+  border-left: 5px solid #2563eb;
+}
+
+.category-study {
+  border-left: 5px solid #16a34a;
+}
+
+/* 14. Style the note count */
+#note-count {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* 15. Style error messages */
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* 16. Style the footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #666666;
+}
+
+/* 17. Make the layout work on small screens */
+@media (max-width: 600px) {
+  main {
+    margin: 15px auto;
+    padding: 10px;
+  }
+
+  section {
+    padding: 15px;
+  }
+
+  #note-form {
+    flex-direction: column;
+  }
+}
